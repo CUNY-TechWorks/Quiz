@@ -83,9 +83,8 @@ export default class Quiz extends Component {
             <div className="quiz-area">
                 <h1> Programming Quiz </h1>
                 <div className="quiz-form"> 
-                    <Routes currentQuestion={currentQuestion} q_arr={q_arr} answers={answers} handleClick={this.handleClick} handleQuestionChange={this.handleQuestionChange} />
+                    <Routes score={score} reset={this.reset} currentQuestion={currentQuestion} q_arr={q_arr} answers={answers} handleClick={this.handleClick} handleQuestionChange={this.handleQuestionChange} />
                 </div>
-                <h2> Score: {score} </h2>
             </div>
          </div>
       )
