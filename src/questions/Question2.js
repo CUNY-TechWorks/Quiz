@@ -11,7 +11,7 @@ export default function Question2(props) {
             <h1> Question 2: </h1>
             <h2> Which one is a data structure? </h2>
             <div className="question-body">
-                { answers[qIndex] !== 'Linked List' && answers[qIndex] !== undefined ? <p className="feedback-body"> Correct answer is: 2.) Linked List! </p> : 
+                { answers[qIndex] !== 'Linked List' && answers[qIndex] !== undefined ? <p className="feedback-body"> Correct answer is: 4.) Linked List! </p> : 
                 answers[qIndex] === 'Linked List' ? <p className="feedback-body"> Yes, Linked List! Good Job! +1 </p> :  
                     <table>
                         <tbody>

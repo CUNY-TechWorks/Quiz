@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import Routes from './Routes';
     
 // current number of questions, along with their answers
-const q_arr = [{question: 'q1', answer: 'It depends'}, {question: 'q2', answer: 'Linked List'}];
+const q_arr = [
+   {question: 'q1', answer: 'It depends'}, 
+   {question: 'q2', answer: 'Linked List'},
+   {question: 'q3', answer: 'Tree'},
+];
 
 export default class Quiz extends Component {
     constructor() {
