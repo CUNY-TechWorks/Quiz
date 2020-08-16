@@ -6,6 +6,7 @@ const q_arr = [
    {question: 'q1', answer: 'It depends'}, 
    {question: 'q2', answer: 'Linked List'},
    {question: 'q3', answer: 'Tree'},
+   {question: 'q4', answer: 'Graph'},
 ];
 
 export default class Quiz extends Component {
