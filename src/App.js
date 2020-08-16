@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Routes from './Routes';
-
- // Notes: 
-    // // reset isCorrect and isWrong to false since we don't want their values 
-       // that was for the original question to be carried over.
-       // 
-    // If a user answers correct to a question and goes to the next one, make sure 
-    // the first question remains correct/wrong for the user. lifecycle methods maybe?
+    
+// current number of questions, along with their answers
+const q_arr = [{question: 'q1', answer: 'It depends'}, {question: 'q2', answer: 'Linked List'}];
 
 export default class Quiz extends Component {
     constructor() {
@@ -15,49 +10,78 @@ export default class Quiz extends Component {
 
        this.state = {
           score: 0,
-          isCorrect: false,
-          isWrong: false,
+          currentQuestion: 'q1',
+          answers: [],
        }
     }
 
-    handleClick = evt => {
-        // if on question 1
-        if(evt.target.baseURI === 'http://localhost:3000/') {
-           if(evt.target.innerText === 'It depends') {
+    componentDidMount() {
+       window.addEventListener('popstate', () => {
+           if(document.location.pathname === '/') {
               this.setState({
-                 score: this.state.score + 1,
-                 isCorrect: true,
+                 currentQuestion: 'q1',
               });
            }
            else {
+              // substring to not include '/' in the pathname
               this.setState({
-                 isWrong: true,
+                 currentQuestion: document.location.pathname.substring(1),
               });
            }
-        }
+       });
+    }
+
+    handleClick = evt => {
+       const { score, currentQuestion, answers } = this.state;
+
+       for(let i=0;i<q_arr.length;i++) {
+          if(currentQuestion === q_arr[i].question) {
+            answers.push(evt.target.innerText);
+            
+            if(evt.target.innerText === q_arr[i].answer) {
+               this.setState({
+                  answers: answers,
+                  score: score + 1, 
+               });
+            }
+            else {
+               this.setState({
+                  answers: answers,
+               })
+            }
+            break; // increase speed; skip over uneccesary iteration
+          }
+       }
+    }
+
+    handleQuestionChange = q => {
+       // make sure results from previous question doesn't carry over to 
+       // the next
+       this.setState({
+           currentQuestion: q,
+       });
     }
 
     reset = () => {
        this.setState({
           score: 0,
-          isCorrect: false,
-          isWrong: false,
+          currentQuestion: 'q1',
+          answers: [],
        });
     }
 
     render() {
-      const { score, isCorrect, isWrong } = this.state;
+      const { score, answers, currentQuestion } = this.state;
 
       return (
          <div className="container">
             <div className="quiz-area">
                 <h1> Programming Quiz </h1>
                 <div className="quiz-form"> 
-                    <Routes isWrong={isWrong} isCorrect={isCorrect} handleClick={this.handleClick} />
+                    <Routes currentQuestion={currentQuestion} q_arr={q_arr} answers={answers} handleClick={this.handleClick} handleQuestionChange={this.handleQuestionChange} />
                 </div>
                 <h2> Score: {score} </h2>
             </div>
-            <Link to="/" onClick={() => this.reset()}> reset </Link>
          </div>
       )
    }

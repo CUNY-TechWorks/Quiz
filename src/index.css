@@ -101,25 +101,11 @@ a:hover {
     color: grey;
 }
 
-.correct-choice-body {
+.feedback-body {
     height: 80%;
     font-size: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.correct-choice {
-    border: green solid 5px;
-    width: 30%;
-    text-align: center;
-    background-color: green;
-}
-
-.wrong-choice {
-    border: red solid 5px;
-    width: 30%;
-    text-align: center;
-    background-color: red; 
 }
